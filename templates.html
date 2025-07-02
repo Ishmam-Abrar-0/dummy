@@ -1,0 +1,92 @@
+Home Template (views/home.html)**
+```
+<div class="row">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4">{{developer.name}}</h1>
+        <h2 class="text-muted">{{developer.title}}</h2>
+        <p class="lead mt-4">{{developer.bio}}</p>
+        <a href="#/projects" class="btn btn-primary btn-lg">View My Work</a>
+    </div>
+</div>
+```
+
+
+Projects Template (views/projects.html)
+
+```
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h2>My Projects</h2>
+    </div>
+    <div class="col-md-6">
+        <input type="text" 
+               class="form-control" 
+               placeholder="Filter projects..." 
+               ng-model="filter" 
+               ng-change="filterProjects()">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4" ng-repeat="project in filteredProjects">
+        <div class="card h-100">
+            <img ng-src="{{project.image}}" class="card-img-top" alt="{{project.title}}">
+            <div class="card-body">
+                <h5 class="card-title">{{project.title}}</h5>
+                <p class="card-text">{{project.description}}</p>
+                <div class="mb-2">
+                    <span class="badge bg-secondary me-1" ng-repeat="tech in project.tech">
+                        {{tech}}
+                    </span>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a ng-href="{{project.demo}}" class="btn btn-primary btn-sm" target="_blank">Demo</a>
+                <a ng-href="{{project.github}}" class="btn btn-outline-secondary btn-sm" target="_blank">Code</a>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+
+**Contact Template (views/contact.html)**
+
+
+```
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2>Contact Me</h2>
+        <form name="contactForm" ng-submit="submitForm(contactForm)" novalidate>
+            <div class="mb-3">
+                <input type="text" 
+                       class="form-control"
+                       placeholder="Your Name"
+                       ng-model="contact.name"
+                       ng-class="{'is-invalid': contactForm.name.$invalid && submitted}"
+                       name="name" required>
+            </div>
+            
+            <div class="mb-3">
+                <input type="email" 
+                       class="form-control"
+                       placeholder="Your Email"
+                       ng-model="contact.email"
+                       ng-class="{'is-invalid': contactForm.email.$invalid && submitted}"
+                       name="email" required>
+            </div>
+            
+            <div class="mb-3">
+                <textarea class="form-control"
+                          rows="5"
+                          placeholder="Your Message"
+                          ng-model="contact.message"
+                          ng-class="{'is-invalid': contactForm.message.$invalid && submitted}"
+                          name="message" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+</div>
+```
